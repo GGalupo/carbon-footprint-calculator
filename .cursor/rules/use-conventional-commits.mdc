@@ -1,0 +1,10 @@
+---
+description: Use the conventional-commits project skill for all git commit messages
+alwaysApply: true
+---
+
+# Git commits and Conventional Commits
+
+Whenever you prepare, draft, review, or run a `git commit` (including amend or message-only changes), read and follow the project skill at `.cursor/skills/conventional-commits/SKILL.md`.
+
+Do not write commit subjects or bodies that conflict with that skill unless the user explicitly overrides it in the same conversation.
