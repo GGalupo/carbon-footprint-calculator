@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Builds & caches
+dist/
+build/
+*.tsbuildinfo
+.cache/
+.vite/
+
+# Environment & local secrets
+.env
+.env.*
+!.env.example
+
+# Logs & package-manager debug
+*.log
+pnpm-debug.log*
+npm-debug.log*
+
+# Coverage & test artifacts
+coverage/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# IDE (keep shared editor settings if you add them later with negated rules)
+.idea/
