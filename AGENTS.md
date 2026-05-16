@@ -86,6 +86,8 @@ Goals: fast DX, accessible UI, minimal custom primitive work.
 
 Shared **Zod schemas**, **types**, and **constants** so frontend and backend stay in sync and duplication stays low.
 
+Import **concrete modules** from the package subpaths (for example `@carbon-footprint-calculator/shared/schemas/housing`), not aggregated `index` entrypoints.
+
 ---
 
 ## Testing
@@ -100,7 +102,8 @@ Shared **Zod schemas**, **types**, and **constants** so frontend and backend sta
 
 ## Conventions for agents
 
-- Prefer **small modules**, **predictable REST** shapes, and **shared validation** from `packages/shared`.
+- **No barrel files:** do not add `index.ts` / `index.js` modules whose main job is re-exporting sibling files. Prefer direct imports from the module.
+- Prefer **small modules**, **predictable REST** shapes, and **shared validation** from `packages/shared` using explicit subpath imports.
 - Keep **calculation logic** testable and **out of** Express route handlers as much as practical.
 - When adding or changing emission factors, **comment or cite** the source (URL or document section).
 - Prefer changes that are **easy to explain and extend**—explicit naming and short rationale where behavior is non-obvious.
