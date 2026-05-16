@@ -13,11 +13,12 @@ disable-model-invocation: true
 
 ```
 <type>[optional scope]: <description>
-
 ```
 
 - **type** (required): `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, or another short lowercase token the team agrees on.
 - **scope** (optional): noun in parentheses describing the area, e.g. `(backend)`, `(frontend)` or `(shared)`.
+- **description** (required): imperative mood, **all lowercase** (including acronyms and product names), no period at the end.
+- **subject only:** write a single line. Do **not** add a body, blank line, or extra paragraphs after the subject.
 
 ## Before writing the message
 
@@ -29,17 +30,14 @@ disable-model-invocation: true
 
 ```
 feat(backend): add user session validation
-
 fix(frontend): prevent double emission on transport submit
-
-docs: align README with monorepo layout
-
-chore(ci): pin Node version in workflow
-
-chore(agents): add conventional commits skill and Cursor rule
-
+docs: align readme with monorepo layout
+chore(ci): pin node version in workflow
+chore(agents): add conventional commits skill and cursor rule
 ```
 
 ## Do not
 
+- Add a commit body or multi-line description; the subject line is the entire message.
+- Use capital letters in the subject (e.g. write `zod`, not `Zod`; `agents`, not `AGENTS`).
 - Use a vague subject like "fix stuff", "updates", or "WIP" unless the user explicitly wants it.
