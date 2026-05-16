@@ -1,0 +1,9 @@
+{
+  "name": "carbon-footprint-calculator",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "build:shared": "pnpm --filter @carbon-footprint-calculator/shared build",
+    "typecheck:shared": "pnpm --filter @carbon-footprint-calculator/shared typecheck"
+  }
+}

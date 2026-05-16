@@ -1,0 +1,29 @@
+{
+  "name": "@carbon-footprint-calculator/shared",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./schemas/housing": {
+      "types": "./dist/schemas/housing.d.ts",
+      "default": "./dist/schemas/housing.js"
+    },
+    "./schemas/food": {
+      "types": "./dist/schemas/food.d.ts",
+      "default": "./dist/schemas/food.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
