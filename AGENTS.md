@@ -63,8 +63,34 @@ When implementing features, favor **clear APIs**, **consistent structure**, **do
 | Components | shadcn/ui |
 | Forms | React Hook Form |
 | Validation | Zod (prefer schemas aligned with `packages/shared`) |
+| Charts | Recharts (via the shadcn `chart` primitive) |
 
 Goals: fast DX, accessible UI, minimal custom primitive work.
+
+### Architecture
+
+The frontend uses the **Container / Presentational components** pattern (a.k.a. Smart / Dumb components):
+
+| Folder | Role |
+|--------|------|
+| `src/containers/` | Smart components. Own state (`useState`, `useForm`), handlers, side effects, and compose presentational pieces. |
+| `src/components/` | Presentational components. Pure UI, props in, JSX out. No local state beyond view-only details. |
+| `src/components/ui/` | shadcn/ui primitives (button, card, input, label, collapsible, chart, ...). |
+| `src/lib/` | Library related helpers |
+
+Rules:
+
+- Presentational components in `src/components/` must not import from `containers/` and must not own application state.
+
+### Shared package imports
+
+Use the `@shared/*` over the full package name:
+
+```ts
+import { housingSchema, type Housing } from "@shared/schemas/housing";
+```
+
+Still respect the **no barrel files** rule from the monorepo: import concrete subpaths, never an aggregated `index`.
 
 ---
 
