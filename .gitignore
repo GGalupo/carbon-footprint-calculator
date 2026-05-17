@@ -24,6 +24,3 @@ coverage/
 # OS cruft
 .DS_Store
 Thumbs.db
-
-# IDE (keep shared editor settings if you add them later with negated rules)
-.idea/

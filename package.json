@@ -3,7 +3,8 @@
   "private": true,
   "packageManager": "pnpm@9.15.4",
   "scripts": {
-    "build:shared": "pnpm --filter @carbon-footprint-calculator/shared build",
-    "typecheck:shared": "pnpm --filter @carbon-footprint-calculator/shared typecheck"
+    "build": "pnpm run -r --if-present build",
+    "typecheck": "pnpm run -r --if-present typecheck",
+    "dev:frontend": "pnpm --filter @carbon-footprint-calculator/frontend dev"
   }
 }
