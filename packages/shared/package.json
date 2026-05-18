@@ -4,13 +4,13 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./schemas/housing": {
-      "types": "./dist/schemas/housing.d.ts",
-      "default": "./dist/schemas/housing.js"
+    "./schemas/*": {
+      "types": "./dist/schemas/*.d.ts",
+      "default": "./dist/schemas/*.js"
     },
-    "./schemas/food": {
-      "types": "./dist/schemas/food.d.ts",
-      "default": "./dist/schemas/food.js"
+    "./types/*": {
+      "types": "./dist/types/*.d.ts",
+      "default": "./dist/types/*.js"
     }
   },
   "files": [
