@@ -1,5 +1,7 @@
+import { Calculator } from "@/containers/Calculator";
+
 function App() {
-  return <div>Hello World</div>;
+  return <Calculator />;
 }
 
 export default App;
