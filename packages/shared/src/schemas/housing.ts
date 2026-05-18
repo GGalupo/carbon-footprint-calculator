@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const housingSchema = z.object({
+  household: z.number().int().min(1, "Minimum of 1 person"),
   electricityKWhPerYear: z.number().nonnegative(),
   naturalGasThermsPerYear: z.number().nonnegative(),
   heatingOilLitresPerYear: z.number().nonnegative(),
