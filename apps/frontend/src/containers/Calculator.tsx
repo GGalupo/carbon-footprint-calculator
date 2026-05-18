@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const DEFAULT_VALUES: Footprint = {
   housing: {
+    household: 1,
     electricityKWhPerYear: 0,
     naturalGasThermsPerYear: 0,
     heatingOilLitresPerYear: 0,

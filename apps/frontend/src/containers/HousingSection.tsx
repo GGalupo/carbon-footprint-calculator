@@ -12,6 +12,11 @@ type HousingInput = {
 
 const HOUSING_INPUTS: readonly HousingInput[] = [
   {
+    key: "household",
+    label: "Household size",
+    unit: "people",
+  },
+  {
     key: "electricityKWhPerYear",
     label: "Electricity",
     unit: "kWh / year",
