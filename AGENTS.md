@@ -104,7 +104,35 @@ Still respect the **no barrel files** rule from the monorepo: import concrete su
 | Validation | Zod (shared schemas where possible) |
 | API style | REST, simple contracts |
 
-**Architecture:** Layered structure with clear separation of concerns (e.g. HTTP layer vs calculation/domain logic). *Document concrete layers here once routes, services, and modules exist.*
+### Architecture
+
+Layered structure, no barrel files. Imports use concrete subpaths with the `.js` extension (NodeNext ESM).
+
+| Folder | Role |
+|--------|------|
+| `src/server.ts` | Bootstrap. Reads env, calls `app.listen`. Keeps boot separate from wiring. |
+| `src/app.ts` | Builds the Express app: `cors`, `express.json`, mounts routers. |
+| `src/routes/` | Express routers. Thin — only wire HTTP verbs/paths to controllers. |
+| `src/controllers/` | HTTP layer. Validate request bodies inline with `safeParse`, return `400` on failure, call services, shape the response. No calculation logic. |
+| `src/services/` | Pure domain functions. Take validated input, return results. |
+
+Conventions:
+
+- Calculation logic lives in `services/`, never in route handlers.
+- Request validation uses shared Zod schemas from `@shared/schemas/*` via `safeParse`; controllers return `400 { error, issues }` inline on failure (no global error middleware for now).
+- Response shapes are TypeScript-only types from `@shared/types/*`.
+
+### Shared package imports
+
+Use the `@shared/*` alias.
+`tsx` (v4+) resolves these aliases at runtime, so no rewrite step is needed.
+
+### Scripts
+
+Run from the repo root:
+
+- `pnpm dev:backend` — start the backend in watch mode (`tsx watch`).
+- `pnpm typecheck` — recursive across the workspace.
 
 ---
 
@@ -112,7 +140,19 @@ Still respect the **no barrel files** rule from the monorepo: import concrete su
 
 Shared **Zod schemas**, **types**, and **constants** so frontend and backend stay in sync and duplication stays low.
 
-Import **concrete modules** from the package subpaths (for example `@carbon-footprint-calculator/shared/schemas/housing`), not aggregated `index` entrypoints.
+Two folders, two purposes:
+
+- `src/schemas/` — Zod schemas + inferred input types for things that cross the network (request bodies, form data). Used for runtime validation at the boundary.
+- `src/types/` — TypeScript-only result/response shapes.
+
+Both apps import via the `@shared/*` alias (frontend through Vite, backend through `tsconfig` paths resolved by `tsx`):
+
+```ts
+import { housingSchema, type Housing } from "@shared/schemas/housing";
+import type { FootprintResult } from "@shared/types/footprint";
+```
+
+Import **concrete subpaths**, never an aggregated `index` (no barrel files).
 
 ---
 
@@ -134,9 +174,3 @@ Import **concrete modules** from the package subpaths (for example `@carbon-foot
 - When adding or changing emission factors, **comment or cite** the source (URL or document section).
 - Prefer changes that are **easy to explain and extend**—explicit naming and short rationale where behavior is non-obvious.
 - Follow project **Cursor** guidance: conventional commits skill/rule under `.cursor/` when creating commits.
-
----
-
-## Open points
-
-- Backend layering: finalize and reflect in this file once `apps/backend` exists (controllers vs services vs domain/calculators).
