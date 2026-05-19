@@ -1,0 +1,14 @@
+---
+description: Use the shared-testing project skill when adding or changing Zod schemas or tests in packages/shared
+globs:
+  - packages/shared/**/*.test.ts
+  - packages/shared/vitest.config.ts
+  - packages/shared/src/schemas/**/*.ts
+alwaysApply: false
+---
+
+# Shared package tests
+
+When working on Zod schemas or tests under `packages/shared`, or on `packages/shared/vitest.config.ts`, read and follow the project skill at `.cursor/skills/shared/testing/SKILL.md`.
+
+That skill is the source of truth for schema test layout, `safeParse` patterns, leaf vs composed schema coverage, and what not to duplicate in backend HTTP tests. Do not write shared tests that conflict with it unless the user explicitly overrides it in the same conversation.

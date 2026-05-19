@@ -163,6 +163,10 @@ import { EMISSION_UNIT } from "@shared/constants/units";
 
 Import **concrete subpaths**, never an aggregated `index` (no barrel files).
 
+### Tests
+
+Schema validation tests live in the **shared-testing** project skill at `.cursor/skills/shared/testing/SKILL.md`. Read it before adding or changing schemas or `*.test.ts` under `packages/shared`.
+
 ---
 
 ## Testing
@@ -170,6 +174,7 @@ Import **concrete subpaths**, never an aggregated `index` (no barrel files).
 | Layer | Tooling | Source of truth |
 |-------|---------|-----------------|
 | Monorepo default | Vitest | — |
+| Shared (`packages/shared`) | Vitest on Zod schemas | `.cursor/skills/shared/testing/SKILL.md` |
 | Frontend | Vitest + React Testing Library | (skill TBD when frontend tests land) |
 | Backend | Vitest + supertest | `.cursor/skills/backend/testing/SKILL.md` |
 
