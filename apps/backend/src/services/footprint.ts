@@ -1,40 +1,20 @@
 import type { Footprint } from "@shared/schemas/footprint.js";
 import type { FootprintResult } from "@shared/types/footprint.js";
+import { calculateFoodFootprint } from "./food.js";
+import { calculateHousingFootprint } from "./housing.js";
 
 /**
- * Compute the per-category footprint result from validated user input.
- *
- * Stub implementation: returns a zeroed `FootprintResult` until real emission
- * factors are wired up. Real factors will be sourced from the EPA GHG Emission
- * Factors Hub and Shrink That Footprint (see AGENTS.md) and applied per field.
+ * Compute the per-person carbon footprint result from user input.
+ * All calculations follow the approach from
+ * Shrink That Footprint and the EPA references listed in AGENTS.md.
  */
-export function calculateFootprint(_input: Footprint): FootprintResult {
+export function calculateFootprint(input: Footprint): FootprintResult {
+  const housing = calculateHousingFootprint(input.housing);
+  const food = calculateFoodFootprint(input.food);
+
   return {
-    total: 0,
-    housing: {
-      total: 0,
-      breakdown: {
-        electricity: 0,
-        naturalGas: 0,
-        heatingOil: 0,
-        lpg: 0,
-        waste: 0,
-        water: 0,
-      },
-    },
-    food: {
-      total: 0,
-      breakdown: {
-        redMeat: 0,
-        whiteMeat: 0,
-        dairy: 0,
-        cereals: 0,
-        vegetables: 0,
-        fruit: 0,
-        oils: 0,
-        snacks: 0,
-        drinks: 0,
-      },
-    },
+    total: housing.total + food.total,
+    housing,
+    food,
   };
 }
