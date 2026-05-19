@@ -5,6 +5,7 @@
   "scripts": {
     "build": "pnpm run -r --if-present build",
     "typecheck": "pnpm run -r --if-present typecheck",
+    "test": "pnpm run -r --if-present test",
     "dev:frontend": "pnpm --filter @carbon-footprint-calculator/frontend dev",
     "dev:backend": "pnpm --filter @carbon-footprint-calculator/backend dev"
   }

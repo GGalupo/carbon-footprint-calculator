@@ -3,7 +3,7 @@ import type { FoodResult } from "@shared/types/food.js";
 import { DAYS_PER_YEAR } from "../constants/date.js";
 
 // Emission factor in kg CO2e/kCal for each food group
-const FOOD_FACTORS = {
+export const FOOD_FACTORS = {
   redMeat: 0.0075,
   whiteMeat: 0.0015,
   dairy: 0.002,

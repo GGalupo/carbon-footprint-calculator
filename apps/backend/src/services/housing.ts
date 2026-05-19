@@ -2,7 +2,7 @@ import type { Housing } from "@shared/schemas/housing.js";
 import type { HousingResult } from "@shared/types/housing.js";
 import { DAYS_PER_YEAR, WEEKS_PER_YEAR } from "../constants/date.js";
 
-const HOUSING_FACTORS = {
+export const HOUSING_FACTORS = {
   // kg CO2e/kWh
   electricity: 0.7,
   // kg CO2e/therm
