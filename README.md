@@ -1,7 +1,7 @@
 # Personal Carbon Footprint Calculator
 
 <p align="center">
-  <img src="docs/readme-hero.png" alt="Carbon footprint calculator — housing and food emissions" width="720" />
+  <img src="assets/readme-hero.png" alt="Carbon footprint calculator — housing and food emissions" width="720" />
 </p>
 
 <p align="center">
@@ -48,7 +48,7 @@ carbon-footprint-calculator/
 │           ├── schemas/          # Zod request validation
 │           ├── types/            # TypeScript response shapes
 │           └── constants/        # e.g. emission unit label
-├── docs/                         # README assets
+├── assets/                       # README images & media
 ├── package.json                  # Root scripts (dev, test, build, typecheck)
 └── pnpm-workspace.yaml
 ```
