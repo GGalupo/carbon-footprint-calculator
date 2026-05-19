@@ -11,6 +11,10 @@
     "./types/*": {
       "types": "./dist/types/*.d.ts",
       "default": "./dist/types/*.js"
+    },
+    "./constants/*": {
+      "types": "./dist/constants/*.d.ts",
+      "default": "./dist/constants/*.js"
     }
   },
   "files": [
