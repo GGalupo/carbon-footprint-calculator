@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { FoodSection } from "@/containers/FoodSection";
 import { HousingSection } from "@/containers/HousingSection";
 import { Page } from "@/components/calculator/Page";
+import { calculateFootprint } from "@/api/calculate-footprint";
 import { footprintSchema, type Footprint } from "@shared/schemas/footprint";
+import type { FootprintResult } from "@shared/types/footprint";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -29,6 +32,10 @@ const DEFAULT_VALUES: Footprint = {
 };
 
 export function Calculator() {
+  const [result, setResult] = useState<FootprintResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -38,14 +45,22 @@ export function Calculator() {
     defaultValues: DEFAULT_VALUES,
   });
 
-  const onSubmit = (data: Footprint) => {
-    console.log(data);
+  const onSubmit = async (data: Footprint) => {
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      const calculated = await calculateFootprint(data);
+      setResult(calculated);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const results = null;
-
-  if (results) {
-    return <p>Results</p>;
+  if (result) {
+    return <p>Result</p>;
   }
 
   return (
@@ -59,7 +74,13 @@ export function Calculator() {
         <HousingSection register={register} errors={errors} />
         <FoodSection register={register} errors={errors} />
 
-        <Page.SubmitButton />
+        {error ? (
+          <p className="text-sm text-destructive" role="alert">
+            {error}
+          </p>
+        ) : null}
+
+        <Page.SubmitButton disabled={isLoading} loading={isLoading} />
       </Page.Form>
     </Page>
   );

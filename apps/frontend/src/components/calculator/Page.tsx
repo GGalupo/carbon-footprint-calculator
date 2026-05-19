@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Leaf } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Leaf, Loader2 } from "lucide-react";
 
 function Page(props: React.ComponentProps<"div">) {
   return <div className="mx-auto w-full max-w-3xl px-4 py-8" {...props} />;
@@ -20,10 +21,24 @@ function Form(props: React.ComponentProps<"form">) {
   return <form className="flex flex-col gap-4" {...props} />;
 }
 
-function SubmitButton(props: Omit<React.ComponentProps<"button">, "children">) {
+type SubmitButtonProps = Omit<React.ComponentProps<"button">, "children"> & {
+  loading?: boolean;
+};
+
+function SubmitButton({
+  loading = false,
+  disabled,
+  className,
+  ...props
+}: SubmitButtonProps) {
   return (
-    <Button type="submit" className="w-full" {...props}>
-      <Leaf />
+    <Button
+      type="submit"
+      className={cn("w-full", className)}
+      disabled={loading ?? disabled}
+      {...props}
+    >
+      {loading ? <Loader2 className="animate-spin" /> : <Leaf />}
       Calculate footprint
     </Button>
   );
