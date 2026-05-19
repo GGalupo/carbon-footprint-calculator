@@ -37,6 +37,8 @@ When implementing features, favor **clear APIs**, **consistent structure**, **do
 - [EPA — Carbon footprint calculator](https://www.epa.gov/carbon-footprint-calculator/)
 - [EPA — GHG Emission Factors Hub (PDF)](https://www.epa.gov/system/files/documents/2023-03/ghg_emission_factors_hub.pdf)
 
+**Sourcing constraint:** when introducing or updating emission factors, calculation formulas, or methodology, use **only** the three reference links above. Do not pull values, formulas, or category definitions from other websites, blog posts, or calculators.
+
 ---
 
 ## Monorepo layout
@@ -114,7 +116,8 @@ Layered structure, no barrel files. Imports use concrete subpaths with the `.js`
 | `src/app.ts` | Builds the Express app: `cors`, `express.json`, mounts routers. |
 | `src/routes/` | Express routers. Thin — only wire HTTP verbs/paths to controllers. |
 | `src/controllers/` | HTTP layer. Validate request bodies inline with `safeParse`, return `400` on failure, call services, shape the response. No calculation logic. |
-| `src/services/` | Pure domain functions. Take validated input, return results. |
+| `src/services/` | Pure domain functions. One file per category (`housing.ts`, `food.ts`, ...) plus `footprint.ts` which composes them. Take validated input, return results. |
+| `src/constants/` | Cross-service primitive constants (e.g. `date.ts` with `DAYS_PER_YEAR`, `WEEKS_PER_YEAR`). Reused by any service that needs them. |
 
 Conventions:
 
@@ -140,16 +143,18 @@ Run from the repo root:
 
 Shared **Zod schemas**, **types**, and **constants** so frontend and backend stay in sync and duplication stays low.
 
-Two folders, two purposes:
+Three folders, three purposes:
 
 - `src/schemas/` — Zod schemas + inferred input types for things that cross the network (request bodies, form data). Used for runtime validation at the boundary.
 - `src/types/` — TypeScript-only result/response shapes.
+- `src/constants/` — cross-app primitive constants that belong to the API contract or shared UI labels (e.g. `EMISSION_UNIT = "kg CO2e/yr"` in `units.ts`).
 
 Both apps import via the `@shared/*` alias (frontend through Vite, backend through `tsconfig` paths resolved by `tsx`):
 
 ```ts
 import { housingSchema, type Housing } from "@shared/schemas/housing";
 import type { FootprintResult } from "@shared/types/footprint";
+import { EMISSION_UNIT } from "@shared/constants/units";
 ```
 
 Import **concrete subpaths**, never an aggregated `index` (no barrel files).
