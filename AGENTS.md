@@ -130,6 +130,10 @@ Conventions:
 Use the `@shared/*` alias.
 `tsx` (v4+) resolves these aliases at runtime, so no rewrite step is needed.
 
+### Tests
+
+Backend test conventions live in the **backend-testing** project skill at `.cursor/skills/backend/testing/SKILL.md`. Read it before adding or changing tests under `apps/backend`.
+
 ### Scripts
 
 Run from the repo root:
@@ -163,11 +167,13 @@ Import **concrete subpaths**, never an aggregated `index` (no barrel files).
 
 ## Testing
 
-| Layer | Tooling / focus |
-|-------|------------------|
-| Monorepo default | Vitest |
-| Frontend | Vitest + React Testing Library (components / integration) |
-| Backend | Calculation logic, services, API integration |
+| Layer | Tooling | Source of truth |
+|-------|---------|-----------------|
+| Monorepo default | Vitest | — |
+| Frontend | Vitest + React Testing Library | (skill TBD when frontend tests land) |
+| Backend | Vitest + supertest | `.cursor/skills/backend/testing/SKILL.md` |
+
+Detailed conventions (layout, what to cover per service or route, supertest patterns, anti-patterns) live in the per-app testing skills, not in this file. The matching `.cursor/rules/*.mdc` auto-attach those skills when relevant files are in context.
 
 ---
 

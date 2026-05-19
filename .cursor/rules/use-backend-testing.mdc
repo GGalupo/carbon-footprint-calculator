@@ -1,0 +1,14 @@
+---
+description: Use the backend-testing project skill when adding or changing backend tests
+globs:
+  - apps/backend/**/*.test.ts
+  - apps/backend/vitest.config.ts
+  - apps/backend/src/services/**/*.ts
+alwaysApply: false
+---
+
+# Backend tests
+
+When working on backend tests, on `apps/backend/vitest.config.ts`, or on backend source under `apps/backend/src/{services,controllers,routes,app.ts}`, read and follow the project skill at `.cursor/skills/backend/testing/SKILL.md`.
+
+That skill is the source of truth for backend test layout, supertest usage, what to cover per service / route, and required tests when adding new backend features. Do not write backend tests that conflict with it unless the user explicitly overrides it in the same conversation.
