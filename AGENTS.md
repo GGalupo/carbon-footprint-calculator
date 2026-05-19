@@ -134,6 +134,8 @@ Use the `@shared/*` alias.
 
 Backend test conventions live in the **backend-testing** project skill at `.cursor/skills/backend/testing/SKILL.md`. Read it before adding or changing tests under `apps/backend`.
 
+Frontend test conventions live in the **frontend-testing** project skill at `.cursor/skills/frontend/testing/SKILL.md`. Read it before adding or changing tests under `apps/frontend`.
+
 ### Scripts
 
 Run from the repo root:
@@ -175,10 +177,10 @@ Schema validation tests live in the **shared-testing** project skill at `.cursor
 |-------|---------|-----------------|
 | Monorepo default | Vitest | — |
 | Shared (`packages/shared`) | Vitest on Zod schemas | `.cursor/skills/shared/testing/SKILL.md` |
-| Frontend | Vitest + React Testing Library | (skill TBD when frontend tests land) |
+| Frontend | Vitest + React Testing Library | `.cursor/skills/frontend/testing/SKILL.md` |
 | Backend | Vitest + supertest | `.cursor/skills/backend/testing/SKILL.md` |
 
-Detailed conventions (layout, what to cover per service or route, supertest patterns, anti-patterns) live in the per-app testing skills, not in this file. The matching `.cursor/rules/*.mdc` auto-attach those skills when relevant files are in context.
+Detailed conventions (layout, what to cover per service or route, supertest patterns, anti-patterns) live in the per-app testing skills, not in this file. The matching `.cursor/rules/*.mdc` auto-attach those skills when relevant files are in context (backend, frontend, shared).
 
 ---
 

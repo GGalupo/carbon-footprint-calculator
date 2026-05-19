@@ -1,0 +1,15 @@
+---
+description: Use the frontend-testing project skill when adding or changing frontend tests
+globs:
+  - apps/frontend/**/*.test.ts
+  - apps/frontend/**/*.test.tsx
+  - apps/frontend/vitest.config.ts
+  - apps/frontend/src/test/**
+alwaysApply: false
+---
+
+# Frontend tests
+
+When working on frontend tests, on `apps/frontend/vitest.config.ts`, or on frontend source under `apps/frontend/src/{api,components,containers}`, read and follow the project skill at `.cursor/skills/frontend/testing/SKILL.md`.
+
+That skill is the source of truth for frontend test layout, RTL usage, what to cover per layer, and required tests when adding new frontend features. Do not write frontend tests that conflict with it unless the user explicitly overrides it in the same conversation.
