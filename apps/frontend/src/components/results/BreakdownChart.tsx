@@ -52,7 +52,11 @@ export function BreakdownChart<T extends string>({
   }
 
   return (
-    <div className="h-[300px] w-full text-muted-foreground">
+    <div
+      role="img"
+      aria-label="Emissions breakdown by category"
+      className="h-[300px] w-full text-muted-foreground"
+    >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={rows} layout="vertical" margin={{ left: 8, right: 16 }}>
           <YAxis
