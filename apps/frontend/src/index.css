@@ -24,6 +24,7 @@
   --border: oklch(0.9 0.02 150);
   --input: oklch(0.9 0.02 150);
   --ring: oklch(0.55 0.12 150);
+  --bar-chart: oklch(0.52 0.17 145);
 }
 
 .dark {
@@ -46,6 +47,7 @@
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.6 0.12 150);
+  --bar-chart: oklch(0.72 0.17 145);
 }
 
 @theme inline {
@@ -72,11 +74,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+  --color-bar-chart: var(--bar-chart);
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 

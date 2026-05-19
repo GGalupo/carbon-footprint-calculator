@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { Wand2 } from "lucide-react";
+import { useForm } from "react-hook-form";
 import { FoodSection } from "@/containers/FoodSection";
 import { HousingSection } from "@/containers/HousingSection";
 import { Page } from "@/components/calculator/Page";
+import { Button } from "@/components/ui/button";
+import { ResultsPage } from "@/components/results/ResultsPage";
 import { calculateFootprint } from "@/api/calculate-footprint";
 import { footprintSchema, type Footprint } from "@shared/schemas/footprint";
 import type { FootprintResult } from "@shared/types/footprint";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const DEFAULT_VALUES: Footprint = {
@@ -31,6 +34,29 @@ const DEFAULT_VALUES: Footprint = {
   },
 };
 
+const SAMPLE_FOOTPRINT: Footprint = {
+  housing: {
+    household: 2,
+    electricityKWhPerYear: 4000,
+    naturalGasThermsPerYear: 120,
+    heatingOilLitresPerYear: 30,
+    lpgLitresPerYear: 10,
+    wasteKgPerWeek: 12,
+    waterLitresPerDay: 250,
+  },
+  food: {
+    redMeat: 200,
+    whiteMeat: 150,
+    dairy: 300,
+    cereals: 800,
+    vegetables: 250,
+    fruit: 150,
+    oils: 100,
+    snacks: 120,
+    drinks: 180,
+  },
+};
+
 export function Calculator() {
   const [result, setResult] = useState<FootprintResult | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -39,6 +65,7 @@ export function Calculator() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Footprint>({
     resolver: zodResolver(footprintSchema),
@@ -59,8 +86,19 @@ export function Calculator() {
     }
   };
 
+  const handleRecalculate = () => {
+    reset(DEFAULT_VALUES);
+    setResult(null);
+    setError(null);
+  };
+
+  const handleFillSampleData = () => {
+    reset(SAMPLE_FOOTPRINT);
+    setError(null);
+  };
+
   if (result) {
-    return <p>Result</p>;
+    return <ResultsPage result={result} onRecalculate={handleRecalculate} />;
   }
 
   return (
@@ -68,6 +106,15 @@ export function Calculator() {
       <Page.Header>
         <Page.Title text="Personal Carbon Footprint" />
         <Page.Description text="Fill in housing and food data to estimate your annual emissions." />
+        <Button
+          type="button"
+          variant="outline"
+          className="mt-4 w-full sm:w-auto"
+          onClick={handleFillSampleData}
+        >
+          <Wand2 />
+          Fill sample data
+        </Button>
       </Page.Header>
 
       <Page.Form onSubmit={handleSubmit(onSubmit)}>

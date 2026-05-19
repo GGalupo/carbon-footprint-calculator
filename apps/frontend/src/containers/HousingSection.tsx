@@ -10,12 +10,13 @@ type HousingInput = {
   unit: string;
 };
 
+const HOUSEHOLD_INPUT: HousingInput = {
+  key: "household",
+  label: "Household size",
+  unit: "people",
+};
+
 const HOUSING_INPUTS: readonly HousingInput[] = [
-  {
-    key: "household",
-    label: "Household size",
-    unit: "people",
-  },
   {
     key: "electricityKWhPerYear",
     label: "Electricity",
@@ -54,6 +55,8 @@ type HousingSectionProps = {
 };
 
 export function HousingSection({ register, errors }: HousingSectionProps) {
+  const householdKey = housingFieldPath(HOUSEHOLD_INPUT.key);
+
   return (
     <Section>
       <Section.Header
@@ -61,8 +64,18 @@ export function HousingSection({ register, errors }: HousingSectionProps) {
         description="Energy, water and waste divided by number of people in the household"
       />
       <Section.Fields>
+        <NumberField
+          id={householdKey}
+          label={HOUSEHOLD_INPUT.label}
+          unit={HOUSEHOLD_INPUT.unit}
+          error={errors.housing?.household?.message}
+          {...register(householdKey, { valueAsNumber: true })}
+        />
+        <div className="hidden sm:block" aria-hidden />
+        <div className="hidden lg:block" aria-hidden />
+
         {HOUSING_INPUTS.map((input) => {
-          const key = `housing.${input.key}` as FieldPath<Footprint>;
+          const key = housingFieldPath(input.key);
 
           return (
             <NumberField
@@ -71,13 +84,15 @@ export function HousingSection({ register, errors }: HousingSectionProps) {
               label={input.label}
               unit={input.unit}
               error={errors.housing?.[input.key]?.message}
-              {...register(key as FieldPath<Footprint>, {
-                valueAsNumber: true,
-              })}
+              {...register(key, { valueAsNumber: true })}
             />
           );
         })}
       </Section.Fields>
     </Section>
   );
+}
+
+function housingFieldPath(key: keyof Housing): FieldPath<Footprint> {
+  return `housing.${key}`;
 }
