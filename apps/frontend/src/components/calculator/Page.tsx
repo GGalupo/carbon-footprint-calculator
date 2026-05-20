@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { Leaf, Loader2 } from "lucide-react";
 
 function Page(props: React.ComponentProps<"div">) {
-  return <div className="mx-auto w-full max-w-3xl px-4 py-8" {...props} />;
+  return <div className="mx-auto w-full max-w-2xl px-4 py-8" {...props} />;
 }
 
 function Header({ children }: { children: React.ReactNode }) {
