@@ -1,15 +1,16 @@
 import { z } from "zod";
+import { nonNegativeNumber } from "./utils.js";
 
 export const foodSchema = z.object({
-  redMeat: z.number().nonnegative(),
-  whiteMeat: z.number().nonnegative(),
-  dairy: z.number().nonnegative(),
-  cereals: z.number().nonnegative(),
-  vegetables: z.number().nonnegative(),
-  fruit: z.number().nonnegative(),
-  oils: z.number().nonnegative(),
-  snacks: z.number().nonnegative(),
-  drinks: z.number().nonnegative(),
+  redMeat: nonNegativeNumber,
+  whiteMeat: nonNegativeNumber,
+  dairy: nonNegativeNumber,
+  cereals: nonNegativeNumber,
+  vegetables: nonNegativeNumber,
+  fruit: nonNegativeNumber,
+  oils: nonNegativeNumber,
+  snacks: nonNegativeNumber,
+  drinks: nonNegativeNumber,
 });
 
 export type Food = z.infer<typeof foodSchema>;
